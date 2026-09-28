@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DC Servicios Contables</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg: #09131e;
+      --card-bg: rgba(15, 27, 44, 0.85);
+      --card-border: rgba(197, 160, 89, 0.25);
+      --card-border-subtle: rgba(255, 255, 255, 0.08);
+      --gold: #c5a059;
+      --gold-light: #e5ca8f;
+      --gold-soft: rgba(197, 160, 89, 0.12);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --whatsapp: #25d366;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(197, 160, 89, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 90% 85%, rgba(13, 30, 51, 0.6) 0%, transparent 50%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 35px 35px, 35px 35px;
+    }
+
+    h1, h2, h3, h4, .brand-title h1 {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(9, 19, 30, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.8rem 5%;
+    }
+
+    .nav-container {
+      max-width: 1250px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .brand img {
+      height: 48px;
+      width: auto;
+      background: #ffffff;
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid var(--gold);
+    }
+
+    .brand-title h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-title span {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      font-weight: 600;
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-link.active {
+      color: #ffffff;
+      background: var(--gold-soft);
+      border-color: var(--gold);
+    }
+
+    main {
+      flex: 1;
+      max-width: 1250px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .tab-view {
+      display: none;
+    }
+
+    .tab-view.active {
+      display: block;
+    }
+
+    /* EFECTO DE ANIMACION EN ENTRADA */
+    .animate-entry {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: tabFadeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes tabFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .active .anim-seq {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: tabFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .active .delay-1 { animation-delay: 0.08s; }
+    .active .delay-2 { animation-delay: 0.16s; }
+    .active .delay-3 { animation-delay: 0.24s; }
+    .active .delay-4 { animation-delay: 0.32s; }
+    .active .delay-5 { animation-delay: 0.40s; }
+
+    .hero-full {
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2.2rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    /* PRIMER CUADRO HERO SIN CONTORNO DORADO */
+    .card-hero-main {
+      position: relative;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: none !important;
+      border-left: none !important;
+      outline: none !important;
+      background-color: #0b1726;
+      background-image: 
+        linear-gradient(to right, rgba(9, 19, 30, 0.96) 0%, rgba(9, 19, 30, 0.88) 45%, rgba(9, 19, 30, 0.38) 100%),
+        url('fondo.png');
+      background-size: cover;
+      background-position: right center;
+      background-repeat: no-repeat;
+      padding: 3.5rem 3rem;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero-text-container {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold-soft);
+      color: var(--gold-light);
+      border: 1px solid var(--gold);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .card-hero-main h2 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    .card-hero-main h2 span {
+      color: var(--gold-light);
+    }
+
+    .card-hero-main p {
+      font-size: 1.05rem;
+      color: #e2e8f0;
+      line-height: 1.6;
+      margin-bottom: 26px;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #c5a059 0%, #9e7d3b 100%);
+      color: #09131e;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-action:hover {
+      background: linear-gradient(135deg, #d8b26e 0%, #b89248 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(197, 160, 89, 0.35);
+    }
+
+    .grid-quad {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 40px;
+    }
+
+    .box-stat {
+      padding: 1.5rem;
+      border-radius: 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border-subtle);
+      border-top: 3px solid var(--gold);
+    }
+
+    .box-stat .val {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: block;
+      color: var(--gold-light);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .box-stat .lbl {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .section-divider {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: 0.5px;
+      scroll-margin-top: 90px;
+    }
+
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--card-border);
+    }
+
+    .grid-4-services {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .service-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border-subtle);
+      border-radius: 14px;
+      padding: 1.8rem;
+      transition: border-color 0.2s;
+    }
+
+    .service-box:hover {
+      border-color: var(--card-border);
+    }
+
+    .service-box .icon {
+      width: 44px;
+      height: 44px;
+      background: var(--gold-soft);
+      border: 1px solid var(--gold);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+    }
+
+    .service-box h4 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .service-box p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .service-box ul {
+      list-style: none;
+      border-top: 1px solid var(--card-border-subtle);
+      padding-top: 12px;
+    }
+
+    .service-box ul li {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .service-box ul li i {
+      color: var(--gold);
+      font-size: 0.75rem;
+    }
+
+    .profile-card-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .profile-sidebar {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .profile-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--gold);
+      margin: 0 auto 15px;
+      display: block;
+      background: #17263c;
+    }
+
+    .profile-sidebar h3 {
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .profile-sidebar .role {
+      font-size: 0.85rem;
+      color: var(--gold-light);
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .profile-sidebar .creds {
+      border-top: 1px solid var(--card-border-subtle);
+      padding-top: 14px;
+      text-align: left;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 2;
+    }
+
+    .profile-sidebar .creds strong {
+      color: var(--text);
+    }
+
+    .story-blocks {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .client-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border-subtle);
+      border-radius: 12px;
+      padding: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .client-card .c-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      background: var(--gold-soft);
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .client-card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .client-card span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .office-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border-subtle);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .office-card .office-icon {
+      font-size: 1.8rem;
+      color: var(--gold-light);
+      margin-bottom: 12px;
+    }
+
+    .office-card h4 {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+
+    .office-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .contact-actions-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-call {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      border: 1px solid var(--card-border);
+      font-weight: 700;
+    }
+
+    .btn-call:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 1.8rem 5%;
+      background: rgba(9, 19, 30, 0.95);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: auto;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-left img {
+      height: 36px;
+      background: white;
+      border-radius: 6px;
+      padding: 2px;
+      border: 1px solid var(--gold);
+    }
+
+    .footer-left p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background-color: var(--whatsapp);
+      color: #ffffff;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+      z-index: 2000;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .floating-whatsapp:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 22px rgba(37, 211, 102, 0.6);
+    }
+
+    /* RESPONSIVIDAD PARA TODOS LOS DISPOSITIVOS */
+    @media (max-width: 1024px) {
+      .grid-quad { grid-template-columns: repeat(2, 1fr); }
+      .grid-4-services { grid-template-columns: 1fr; }
+      .profile-card-grid { grid-template-columns: 1fr; }
+      .clients-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 0.6rem 4%; }
+      .nav-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      nav {
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+      }
+      nav::-webkit-scrollbar { display: none; }
+      .nav-link {
+        white-space: nowrap;
+        font-size: 0.85rem;
+        padding: 6px 12px;
+      }
+      .card-hero-main {
+        min-height: auto;
+        padding: 2.2rem 1.4rem;
+        background-image: 
+          linear-gradient(rgba(9, 19, 30, 0.94), rgba(9, 19, 30, 0.94)),
+          url('fondo.png');
+      }
+      .card-hero-main h2 { font-size: 1.85rem; }
+      .grid-quad { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .clients-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+      .floating-whatsapp {
+        bottom: 18px;
+        right: 18px;
+        width: 52px;
+        height: 52px;
+        font-size: 26px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .brand-title h1 { font-size: 1rem; }
+      .card-hero-main h2 { font-size: 1.55rem; }
+      .btn-action { width: 100%; justify-content: center; }
+      .contact-actions-wrap .btn-action { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <div class="brand" onclick="navigateTo('inicio')">
+        <img src="logo.png" alt="DC Servicios Contables" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'80\' height=\'80\' viewBox=\'0 0 80 80\'><rect width=\'80\' height=\'80\' rx=\'10\' fill=\'white\'/><text x=\'50%\' y=\'55%\' font-size=\'26\' font-weight=\'bold\' text-anchor=\'middle\' fill=\'%230c1322\'>DC</text></svg>'">
+        <div class="brand-title">
+          <h1>DC Contables</h1>
+          <span>Servicios Profesionales</span>
+        </div>
+      </div>
+
+      <nav>
+        <button id="btn-inicio" class="nav-link active" onclick="navigateTo('inicio')"><i class="fas fa-home"></i> Inicio</button>
+        <button id="btn-servicios" class="nav-link" onclick="navigateTo('servicios')"><i class="fas fa-briefcase"></i> Servicios</button>
+        <button id="btn-nosotros" class="nav-link" onclick="navigateTo('nosotros')"><i class="fas fa-user-tie"></i> Nosotros</button>
+        <button id="btn-clientes" class="nav-link" onclick="navigateTo('clientes')"><i class="fas fa-building"></i> Clientes</button>
+        <button id="btn-contacto" class="nav-link" onclick="navigateTo('contacto')"><i class="fas fa-envelope"></i> Contacto</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- INICIO Y SERVICIOS EN LA MISMA PÁGINA -->
+    <section id="tab-inicio" class="tab-view active animate-entry">
+      <div class="hero-full anim-seq delay-1">
+        <div class="card card-hero-main">
+          <div class="hero-text-container">
+            <span class="tag"><i class="fas fa-balance-scale"></i> Cumplimiento Fiscal Integral</span>
+            <h2>¿YA TE ACTUALIZASTE <span>EN EL SAT?</span></h2>
+            <p>Te apoyamos en tu negocio para que operes con total tranquilidad fiscal. Soluciones efectivas en declaraciones, contabilidad general y trámites directos ante el SAT tanto presenciales como remotos.</p>
+            <button class="btn-action" onclick="navigateTo('contacto')">
+              <i class="fas fa-address-book"></i> Contacto
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-quad anim-seq delay-2">
+        <div class="box-stat">
+          <span class="val">+6 Años</span>
+          <span class="lbl">De Experiencia</span>
+        </div>
+        <div class="box-stat">
+          <span class="val">Nacional</span>
+          <span class="lbl">Cobertura en México</span>
+        </div>
+        <div class="box-stat">
+          <span class="val">CFDI 4.0</span>
+          <span class="lbl">Facturación y Nómina</span>
+        </div>
+        <div class="box-stat">
+          <span class="val">2 Oficinas</span>
+          <span class="lbl">Puebla y Tampico</span>
+        </div>
+      </div>
+
+      <!-- SECCIÓN SERVICIOS -->
+      <h3 id="bloque-servicios" class="section-divider anim-seq delay-3"><i class="fas fa-landmark" style="color: var(--gold-light);"></i> Nuestros Servicios</h3>
+
+      <div class="grid-4-services">
+        <div class="service-box anim-seq delay-3">
+          <div class="icon"><i class="fas fa-file-invoice-dollar"></i></div>
+          <h4>Servicios Fiscales Completos</h4>
+          <p>Cumplimiento normativo y control fiscal riguroso para tu negocio o persona moral.</p>
+          <ul>
+            <li><i class="fas fa-check"></i> Declaraciones mensuales y anuales</li>
+            <li><i class="fas fa-check"></i> Personas físicas y personas morales</li>
+            <li><i class="fas fa-check"></i> Cálculo de ISR e IVA</li>
+            <li><i class="fas fa-check"></i> Estrategias básicas de optimización fiscal</li>
+          </ul>
+        </div>
+
+        <div class="service-box anim-seq delay-4">
+          <div class="icon"><i class="fas fa-stamp"></i></div>
+          <h4>Trámites y Gestión SAT</h4>
+          <p>Manejo de registros, estatus tributario y atención a requerimientos oficiales.</p>
+          <ul>
+            <li><i class="fas fa-check"></i> Altas y bajas en el SAT</li>
+            <li><i class="fas fa-check"></i> Cambio de régimen (ej. RESICO)</li>
+            <li><i class="fas fa-check"></i> Tramitación de e.firma y RFC</li>
+            <li><i class="fas fa-check"></i> Atención a requerimientos del SAT</li>
+          </ul>
+        </div>
+
+        <div class="service-box anim-seq delay-4">
+          <div class="icon"><i class="fas fa-calculator"></i></div>
+          <h4>Contabilidad General</h4>
+          <p>Organización financiera y administrativa metódica para la toma de decisiones.</p>
+          <ul>
+            <li><i class="fas fa-check"></i> Registro estructurado de operaciones</li>
+            <li><i class="fas fa-check"></i> Alta y baja de actividad o giro del negocio</li>
+            <li><i class="fas fa-check"></i> Cumplimiento de obligaciones fiscales</li>
+            <li><i class="fas fa-check"></i> Conciliaciones y balanzas</li>
+          </ul>
+        </div>
+
+        <div class="service-box anim-seq delay-5">
+          <div class="icon"><i class="fas fa-users-cog"></i></div>
+          <h4>Nóminas y Seguridad Social</h4>
+          <p>Gestión laboral integral respaldada con asesoría legal especializada.</p>
+          <ul>
+            <li><i class="fas fa-check"></i> Cálculo de sueldos</li>
+            <li><i class="fas fa-check"></i> ISR de trabajadores</li>
+            <li><i class="fas fa-check"></i> Gestión IMSS e INFONAVIT</li>
+            <li><i class="fas fa-check"></i> Timbrado oficial de nómina</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PÁGINA: NOSOTROS -->
+    <section id="tab-nosotros" class="tab-view">
+      <div class="profile-card-grid">
+        <div class="profile-sidebar anim-seq delay-1">
+          <img src="foto.png" alt="C.P Diana M. Cisneros Estrada" class="profile-photo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'110\' height=\'110\' viewBox=\'0 0 110 110\'><circle cx=\'55\' cy=\'55\' r=\'50\' fill=\'%2317263c\' stroke=\'%23c5a059\' stroke-width=\'2\'/><path d=\'M55 52 A18 18 0 1 0 55 16 A18 18 0 1 0 55 52 Z M30 88 C30 72 40 64 55 64 C70 64 80 72 80 88 Z\' fill=\'%23e5ca8f\'/></svg>'">
+          <h3>C.P Diana M. Cisneros Estrada</h3>
+          <span class="role">Servicios Contables y Fiscales</span>
+          
+          <div class="creds">
+            <div><strong>RFC:</strong> CIED860920CB4</div>
+            <div><strong>Carta Tec.:</strong> 28140078</div>
+            <div><strong>Const. Lic.:</strong> No. 4317</div>
+          </div>
+        </div>
+
+        <div class="story-blocks">
+          <div class="card anim-seq delay-2">
+            <h3 style="font-size: 1.4rem; margin-bottom: 12px;"><i class="fas fa-history" style="color: var(--gold-light);"></i> Sobre Nosotros</h3>
+            <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 14px;">
+              En <strong>DC Servicios Contables</strong>, iniciamos operaciones en la ciudad de Tampico, Tamaulipas en el año 2020, dentro de un contexto de transformación global de era digital y empresarial.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.6;">
+              Nuestro objetivo es brindar apoyo integral a las pequeñas y medianas empresas, en sus necesidades contables y fiscales, adaptándonos tanto a esquemas presenciales como remotos. Contamos con más de 6 años de experiencia, atendiendo clientes en toda la República Mexicana con profesionalismo, compromiso y eficiencia.
+            </p>
+          </div>
+
+          <div class="grid-2">
+            <div class="card anim-seq delay-3">
+              <h4 style="font-size: 1.1rem; margin-bottom: 10px;"><i class="fas fa-award" style="color: var(--gold-light);"></i> Trayectoria Profesional</h4>
+              <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
+                Cuento con más de 10 años de experiencia en las áreas de Comercialización, así como Gestión de trámites Industriales y Comerciales, y Certificación en Técnicas Neurolingüísticas.
+              </p>
+            </div>
+            <div class="card anim-seq delay-4">
+              <h4 style="font-size: 1.1rem; margin-bottom: 10px;"><i class="fas fa-shield-alt" style="color: var(--gold-light);"></i> Alianzas y Respaldo Legal</h4>
+              <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
+                Contamos con el apoyo y Asesoría Legal de la Lic. Janeth Cantú que nos apoya en el Departamento de Nóminas y Seguro Social.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PÁGINA: CLIENTES -->
+    <section id="tab-clientes" class="tab-view">
+      <div style="margin-bottom: 22px;" class="anim-seq delay-1">
+        <h3 style="font-size: 1.5rem; margin-bottom: 6px;">Nuestros Principales Clientes</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Empresas y profesionistas en la República Mexicana que respaldan nuestro servicio.</p>
+      </div>
+
+      <div class="clients-grid">
+        <div class="client-card anim-seq delay-1">
+          <div class="c-icon"><i class="fas fa-car"></i></div>
+          <div>
+            <h4>Servicios DiDi Plataformas</h4>
+            <span><i class="fas fa-map-marker-alt"></i> Cd. Tampico, Tamps.</span>
+          </div>
+        </div>
+
+        <div class="client-card anim-seq delay-2">
+          <div class="c-icon"><i class="fas fa-industry"></i></div>
+          <div>
+            <h4>Grupo Elyon SA de CV</h4>
+            <span><i class="fas fa-map-marker-alt"></i> Cd. Nuevo León</span>
+          </div>
+        </div>
+
+        <div class="client-card anim-seq delay-2">
+          <div class="c-icon"><i class="fas fa-tools"></i></div>
+          <div>
+            <h4>Embobinados Céspedes</h4>
+            <span><i class="fas fa-map-marker-alt"></i> Cd. Tampico, Tamps.</span>
+          </div>
+        </div>
+
+        <div class="client-card anim-seq delay-3">
+          <div class="c-icon"><i class="fas fa-paint-roller"></i></div>
+          <div>
+            <h4>Proveedor Pulido de Pisos</h4>
+            <span><i class="fas fa-map-marker-alt"></i> Cd. de Puebla</span>
+          </div>
+        </div>
+
+        <div class="client-card anim-seq delay-3">
+          <div class="c-icon"><i class="fas fa-hammer"></i></div>
+          <div>
+            <h4>Ferretería y Materiales El Arroyo</h4>
+            <span><i class="fas fa-map-marker-alt"></i> Cd. de México</span>
+          </div>
+        </div>
+
+        <div class="client-card anim-seq delay-3">
+          <div class="c-icon"><i class="fas fa-drafting-compass"></i></div>
+          <div>
+            <h4>URVIC Ingeniería y Diseño SA de CV</h4>
+            <span><i class="fas fa-map-marker-alt"></i> Cd. Querétaro</span>
+          </div>
+        </div>
+
+        <div class="client-card anim-seq delay-4">
+          <div class="c-icon"><i class="fas fa-fire-extinguisher"></i></div>
+          <div>
+            <h4>Servicios Contraincendio de Nuevo León</h4>
+            <span><i class="fas fa-map-marker-alt"></i> Cd. Nuevo León</span>
+          </div>
+        </div>
+
+        <div class="client-card anim-seq delay-4">
+          <div class="c-icon"><i class="fas fa-wrench"></i></div>
+          <div>
+            <h4>Bimmer Platinum Service SA de CV</h4>
+            <span><i class="fas fa-map-marker-alt"></i> Cd. Nuevo León</span>
+          </div>
+        </div>
+
+        <div class="client-card anim-seq delay-4">
+          <div class="c-icon"><i class="fas fa-truck"></i></div>
+          <div>
+            <h4>Transportes Mondragón</h4>
+            <span><i class="fas fa-map-marker-alt"></i> Gpe., Nvo. León</span>
+          </div>
+        </div>
+
+        <div class="client-card anim-seq delay-5">
+          <div class="c-icon"><i class="fas fa-building"></i></div>
+          <div>
+            <h4>Uno Creaciones Inmobiliarias SA de CV</h4>
+            <span><i class="fas fa-map-marker-alt"></i> Cd. Nuevo León</span>
+          </div>
+        </div>
+
+        <div class="client-card anim-seq delay-5">
+          <div class="c-icon"><i class="fas fa-cogs"></i></div>
+          <div>
+            <h4>Refaccionaria de Tampico</h4>
+            <span><i class="fas fa-map-marker-alt"></i> Cd. Tampico, Tamps.</span>
+          </div>
+        </div>
+
+        <div class="client-card anim-seq delay-5">
+          <div class="c-icon"><i class="fas fa-user-check"></i></div>
+          <div>
+            <h4>Juan Manuel Medrano</h4>
+            <span><i class="fas fa-map-marker-alt"></i> Cd. Nuevo León</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PÁGINA: CONTACTO -->
+    <section id="tab-contacto" class="tab-view">
+      <div class="contact-grid">
+        <div class="office-card anim-seq delay-1">
+          <div class="office-icon"><i class="fas fa-map-marked-alt"></i></div>
+          <h4>Oficina 1 (Puebla)</h4>
+          <p>2 Ote Orilla laguna, Los Ángeles Tetela, Puebla, México.</p>
+          <a href="https://wa.me/528336610140" target="_blank" class="btn-action" style="font-size: 0.85rem; padding: 10px 18px;">
+            <i class="fab fa-whatsapp"></i> Contactar Puebla
+          </a>
+        </div>
+
+        <div class="office-card anim-seq delay-2">
+          <div class="office-icon"><i class="fas fa-map-pin"></i></div>
+          <h4>Oficina 2 (Tampico)</h4>
+          <p>Tampico, Tamaulipas. C.P. 89365.</p>
+          <a href="https://wa.me/528336610140" target="_blank" class="btn-action" style="font-size: 0.85rem; padding: 10px 18px;">
+            <i class="fab fa-whatsapp"></i> Contactar Tampico
+          </a>
+        </div>
+      </div>
+
+      <div class="card anim-seq delay-3" style="margin-top: 20px; text-align: center; padding: 2.5rem; border-color: var(--card-border);">
+        <h3 style="font-size: 1.5rem; margin-bottom: 8px;">Quedamos a sus órdenes, nos encantará atenderle</h3>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Atención remota a toda la República y esquemas presenciales</p>
+        <div style="font-size: 2.2rem; font-weight: 800; margin-bottom: 20px; font-family: 'Space Grotesk', sans-serif; color: var(--gold-light);">
+          833 661 01 40
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px;">
+          <i class="fas fa-envelope" style="color: var(--gold);"></i> dianaconta34@gmail.com
+        </p>
+
+        <div class="contact-actions-wrap">
+          <a href="https://wa.me/528336610140" target="_blank" class="btn-action" style="background: var(--whatsapp); color: #ffffff;">
+            <i class="fab fa-whatsapp"></i> whatsapp
+          </a>
+          <a href="tel:8336610140" class="btn-action btn-call">
+            <i class="fas fa-phone-alt"></i> Llamar
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-left">
+      <img src="logo.png" alt="DC Logo" onerror="this.style.display='none'">
+      <div>
+        <strong style="display: block; color: #fff;">DC Servicios Contables</strong>
+        <p>C.P Diana M. Cisneros Estrada</p>
+      </div>
+    </div>
+    <div style="display: flex; gap: 20px; align-items: center;">
+      <a href="mailto:dianaconta34@gmail.com" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem;">
+        <i class="fas fa-envelope" style="color: var(--gold);"></i> dianaconta34@gmail.com
+      </a>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/528336610140" target="_blank" class="floating-whatsapp" title="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    function navigateTo(target) {
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => link.classList.remove('active'));
+
+      if (target === 'inicio') {
+        showTab('inicio');
+        document.getElementById('btn-inicio').classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } 
+      else if (target === 'servicios') {
+        const homeTab = document.getElementById('tab-inicio');
+        if (!homeTab.classList.contains('active')) {
+          showTab('inicio');
+        }
+        document.getElementById('btn-servicios').classList.add('active');
+        
+        setTimeout(() => {
+          const serviceBlock = document.getElementById('bloque-servicios');
+          if (serviceBlock) {
+            serviceBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      } 
+      else {
+        showTab(target);
+        const activeBtn = document.getElementById('btn-' + target);
+        if (activeBtn) activeBtn.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function showTab(tabName) {
+      const tabs = document.querySelectorAll('.tab-view');
+      tabs.forEach(tab => {
+        tab.classList.remove('active');
+        tab.classList.remove('animate-entry');
+      });
+
+      const activeView = document.getElementById('tab-' + tabName);
+      if (activeView) {
+        activeView.classList.add('active');
+        void activeView.offsetWidth;
+        activeView.classList.add('animate-entry');
+      }
+    }
+  </script>
+
+</body>
+</html>
