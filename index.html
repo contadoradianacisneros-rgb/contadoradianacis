@@ -85,19 +85,11 @@
     }
 
     .brand-title h1 {
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: 700;
       line-height: 1.1;
       letter-spacing: 0.5px;
-    }
-
-    .brand-title span {
-      font-size: 0.7rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      font-weight: 600;
-      display: block;
+      color: #ffffff;
     }
 
     nav {
@@ -325,6 +317,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 18px;
+      margin-bottom: 45px;
     }
 
     .service-box {
@@ -384,6 +377,65 @@
     .service-box ul li i {
       color: var(--gold);
       font-size: 0.75rem;
+    }
+
+    .facilities-section {
+      margin-bottom: 30px;
+    }
+
+    .facilities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .facility-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .facility-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-border);
+    }
+
+    .facility-img-wrap {
+      width: 100%;
+      height: 230px;
+      overflow: hidden;
+      background: #0f1c2d;
+      position: relative;
+    }
+
+    .facility-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .facility-card:hover .facility-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    .facility-content {
+      padding: 1.3rem;
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .facility-content p {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.5;
     }
 
     .profile-card-grid {
@@ -525,6 +577,23 @@
       margin-bottom: 16px;
     }
 
+    .office-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-maps {
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-maps:hover {
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(-2px);
+    }
+
     .contact-actions-wrap {
       display: flex;
       justify-content: center;
@@ -602,6 +671,7 @@
     /* RESPONSIVIDAD PARA TODOS LOS DISPOSITIVOS */
     @media (max-width: 1024px) {
       .grid-quad { grid-template-columns: repeat(2, 1fr); }
+      .facilities-grid { grid-template-columns: repeat(2, 1fr); }
       .grid-4-services { grid-template-columns: 1fr; }
       .profile-card-grid { grid-template-columns: 1fr; }
       .clients-grid { grid-template-columns: repeat(2, 1fr); }
@@ -635,6 +705,7 @@
       }
       .card-hero-main h2 { font-size: 1.85rem; }
       .grid-quad { grid-template-columns: 1fr; }
+      .facilities-grid { grid-template-columns: 1fr; }
       .grid-2 { grid-template-columns: 1fr; }
       .clients-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; text-align: center; }
@@ -652,6 +723,7 @@
       .card-hero-main h2 { font-size: 1.55rem; }
       .btn-action { width: 100%; justify-content: center; }
       .contact-actions-wrap .btn-action { width: 100%; }
+      .office-buttons .btn-action { width: 100%; }
     }
   </style>
 </head>
@@ -662,8 +734,7 @@
       <div class="brand" onclick="navigateTo('inicio')">
         <img src="logo.png" alt="DC Servicios Contables" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'80\' height=\'80\' viewBox=\'0 0 80 80\'><rect width=\'80\' height=\'80\' rx=\'10\' fill=\'white\'/><text x=\'50%\' y=\'55%\' font-size=\'26\' font-weight=\'bold\' text-anchor=\'middle\' fill=\'%230c1322\'>DC</text></svg>'">
         <div class="brand-title">
-          <h1>DC Contables</h1>
-          <span>Servicios Profesionales</span>
+          <h1>DC Servicios Contables</h1>
         </div>
       </div>
 
@@ -686,7 +757,7 @@
           <div class="hero-text-container">
             <span class="tag"><i class="fas fa-balance-scale"></i> Cumplimiento Fiscal Integral</span>
             <h2>¿YA TE ACTUALIZASTE <span>EN EL SAT?</span></h2>
-            <p>Te apoyamos en tu negocio para que operes con total tranquilidad fiscal. Soluciones efectivas en declaraciones, contabilidad general y trámites directos ante el SAT tanto presenciales como remotos.</p>
+            <p>Te apoyamos en tu negocio para que operes con total tranquilidad fiscal. Soluciones efectivas en declaraciones, contabilidad general y trámites directos ante el SAT de forma remota.</p>
             <button class="btn-action" onclick="navigateTo('contacto')">
               <i class="fas fa-address-book"></i> Contacto
             </button>
@@ -765,6 +836,41 @@
           </ul>
         </div>
       </div>
+
+      <!-- SECCIÓN FOTOS DE INSTALACIONES (ABAJO DE SERVICIOS) -->
+      <div class="facilities-section anim-seq delay-5">
+        <h3 class="section-divider"><i class="fas fa-building" style="color: var(--gold-light);"></i> Instalaciones Sede Puebla</h3>
+        <div class="facilities-grid">
+          
+          <div class="facility-card">
+            <div class="facility-img-wrap">
+              <img src="1.jpeg" alt="Instalaciones Sede Puebla" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'250\' viewBox=\'0 0 400 250\'><rect width=\'400\' height=\'250\' fill=\'%230f1c2d\'/><text x=\'50%\' y=\'50%\' fill=\'%23e5ca8f\' font-size=\'16\' font-weight=\'bold\' text-anchor=\'middle\'>Instalaciones Puebla</text></svg>'">
+            </div>
+            <div class="facility-content">
+              <p>Fachada externa del edificio donde se ubica nuestro despacho en el departamento 1.</p>
+            </div>
+          </div>
+
+          <div class="facility-card">
+            <div class="facility-img-wrap">
+              <img src="2.jpeg" alt="Instalaciones Sede Puebla" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'250\' viewBox=\'0 0 400 250\'><rect width=\'400\' height=\'250\' fill=\'%230f1c2d\'/><text x=\'50%\' y=\'50%\' fill=\'%23e5ca8f\' font-size=\'16\' font-weight=\'bold\' text-anchor=\'middle\'>Instalaciones Puebla</text></svg>'">
+            </div>
+            <div class="facility-content">
+              <p>Espacio de trabajo y análisis para la gestión contable, cálculo de impuestos y asesoría personalizada.</p>
+            </div>
+          </div>
+
+          <div class="facility-card">
+            <div class="facility-img-wrap">
+              <img src="3.jpeg" alt="Instalaciones Sede Puebla" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'250\' viewBox=\'0 0 400 250\'><rect width=\'400\' height=\'250\' fill=\'%230f1c2d\'/><text x=\'50%\' y=\'50%\' fill=\'%23e5ca8f\' font-size=\'16\' font-weight=\'bold\' text-anchor=\'middle\'>Instalaciones Puebla</text></svg>'">
+            </div>
+            <div class="facility-content">
+              <p>Área confortable para recibir a nuestros clientes y dar seguimiento a trámites y consultas.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </section>
 
     <!-- PÁGINA: NOSOTROS -->
@@ -789,7 +895,7 @@
               En <strong>DC Servicios Contables</strong>, iniciamos operaciones en la ciudad de Tampico, Tamaulipas en el año 2020, dentro de un contexto de transformación global de era digital y empresarial.
             </p>
             <p style="color: var(--text-muted); line-height: 1.6;">
-              Nuestro objetivo es brindar apoyo integral a las pequeñas y medianas empresas, en sus necesidades contables y fiscales, adaptándonos tanto a esquemas presenciales como remotos. Contamos con más de 6 años de experiencia, atendiendo clientes en toda la República Mexicana con profesionalismo, compromiso y eficiencia.
+              Nuestro objetivo es brindar apoyo integral a las pequeñas y medianas empresas, en sus necesidades contables y fiscales, adaptándonos eficazmente a esquemas remotos. Contamos con más de 6 años de experiencia, atendiendo clientes en toda la República Mexicana con profesionalismo, compromiso y eficiencia.
             </p>
           </div>
 
@@ -820,6 +926,22 @@
 
       <div class="clients-grid">
         <div class="client-card anim-seq delay-1">
+          <div class="c-icon"><i class="fas fa-cogs"></i></div>
+          <div>
+            <h4>SERVEC</h4>
+            <span><i class="fas fa-map-marker-alt"></i> Tampico</span>
+          </div>
+        </div>
+
+        <div class="client-card anim-seq delay-1">
+          <div class="c-icon"><i class="fas fa-industry"></i></div>
+          <div>
+            <h4>STI INDUSTRIAL</h4>
+            <span><i class="fas fa-map-marker-alt"></i> Puebla</span>
+          </div>
+        </div>
+
+        <div class="client-card anim-seq delay-1">
           <div class="c-icon"><i class="fas fa-car"></i></div>
           <div>
             <h4>Servicios DiDi Plataformas</h4>
@@ -843,7 +965,7 @@
           </div>
         </div>
 
-        <div class="client-card anim-seq delay-3">
+        <div class="client-card anim-seq delay-2">
           <div class="c-icon"><i class="fas fa-paint-roller"></i></div>
           <div>
             <h4>Proveedor Pulido de Pisos</h4>
@@ -867,7 +989,7 @@
           </div>
         </div>
 
-        <div class="client-card anim-seq delay-4">
+        <div class="client-card anim-seq delay-3">
           <div class="c-icon"><i class="fas fa-fire-extinguisher"></i></div>
           <div>
             <h4>Servicios Contraincendio de Nuevo León</h4>
@@ -891,7 +1013,7 @@
           </div>
         </div>
 
-        <div class="client-card anim-seq delay-5">
+        <div class="client-card anim-seq delay-4">
           <div class="c-icon"><i class="fas fa-building"></i></div>
           <div>
             <h4>Uno Creaciones Inmobiliarias SA de CV</h4>
@@ -922,20 +1044,30 @@
       <div class="contact-grid">
         <div class="office-card anim-seq delay-1">
           <div class="office-icon"><i class="fas fa-map-marked-alt"></i></div>
-          <h4>Oficina 1 (Puebla)</h4>
+          <h4>Oficina Puebla</h4>
           <p>2 Ote Orilla laguna, Los Ángeles Tetela, Puebla, México.</p>
-          <a href="https://wa.me/528336610140" target="_blank" class="btn-action" style="font-size: 0.85rem; padding: 10px 18px;">
-            <i class="fab fa-whatsapp"></i> Contactar Puebla
-          </a>
+          <div class="office-buttons">
+            <a href="https://wa.me/528336610140" target="_blank" class="btn-action" style="font-size: 0.85rem; padding: 10px 18px;">
+              <i class="fab fa-whatsapp"></i> Contactar Puebla
+            </a>
+            <a href="https://www.google.com/maps/place/Despacho+Contable,+Camino+real+a+la+laguna+513,+72960+Los+%C3%81ngeles+Tetela,+Pue./data=!4m2!3m1!1s0x85cfbd0046b4dee5:0xb70b63d260d3a04a!18m1!1e1?utm_source=mstt_1&entry=gps&coh=192189&g_ep=CAESBzI2LjM4LjEYACCenQoqvQEsOTQyNjc3MjcsOTQyOTIxOTUsOTQyOTk1MzIsMTAwNzk2NDk4LDEwMDc5Nzc2MSwxMDA4MjY0NzUsMTAwNzk2NTM1LDk0MjgwNTc2LDk0MjA3Mzk0LDk0MjA3NTA2LDk0MjA4NTA2LDk0MjE4NjUzLDk0MjI5ODM5LDk0Mjc1MTY4LDk0Mjc5NjE5LDEwMDgzNTcwNCwxMDA4MjUwMjUsMTAwODIwMjM3LDEwMDgyMjQ5NCwxMDA4Mjc5NzVCAk1Y&skid=be8d87eb-0f99-4e30-bf8f-c8e7c740db1c&g_st=aw" target="_blank" class="btn-action btn-maps" style="font-size: 0.85rem; padding: 10px 18px;">
+              <i class="fas fa-map-marker-alt"></i> Ubicación
+            </a>
+          </div>
         </div>
 
         <div class="office-card anim-seq delay-2">
           <div class="office-icon"><i class="fas fa-map-pin"></i></div>
-          <h4>Oficina 2 (Tampico)</h4>
-          <p>Tampico, Tamaulipas. C.P. 89365.</p>
-          <a href="https://wa.me/528336610140" target="_blank" class="btn-action" style="font-size: 0.85rem; padding: 10px 18px;">
-            <i class="fab fa-whatsapp"></i> Contactar Tampico
-          </a>
+          <h4>Oficina Tampico</h4>
+          <p>Dominicana 102.</p>
+          <div class="office-buttons">
+            <a href="https://wa.me/528336610140" target="_blank" class="btn-action" style="font-size: 0.85rem; padding: 10px 18px;">
+              <i class="fab fa-whatsapp"></i> Contactar Tampico
+            </a>
+            <a href="https://www.google.com/maps/@22.2810497,-97.8816147,3a,90y,40.33h,77.68t/data=!3m5!1e1!3m3!1sQaPZbb1YpCRNgySzNNXWpg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3DQaPZbb1YpCRNgySzNNXWpg%26w%3D900%26h%3D600%26ll%3D0.0,0.0%26yaw%3D40.0%26pitch%3D13.0%26thumbfov%3D112%26cb_client%3Dgmm.iv.android?utm_source=mstt_0&g_ep=CAESBzI2LjM4LjEYACCBgQEqvQEsOTQyNjc3MjcsOTQyOTIxOTUsOTQyOTk1MzIsMTAwNzk2NDk4LDEwMDc5Nzc2MSwxMDA4MjY0NzUsMTAwNzk2NTM1LDk0MjgwNTc2LDk0MjA3Mzk0LDk0MjA3NTA2LDk0MjA4NTA2LDk0MjE4NjUzLDk0MjI5ODM5LDk0Mjc1MTY4LDk0Mjc5NjE5LDEwMDgzNTcwNCwxMDA4MjUwMjUsMTAwODIwMjM3LDEwMDgyMjQ5NCwxMDA4Mjc5NzVCAk1Y&skid=fb239636-b2c4-4ab5-8c58-15b1affc0b06&g_st=ac" target="_blank" class="btn-action btn-maps" style="font-size: 0.85rem; padding: 10px 18px;">
+              <i class="fas fa-map-marker-alt"></i> Ubicación
+            </a>
+          </div>
         </div>
       </div>
 
